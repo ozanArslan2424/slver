@@ -2,13 +2,13 @@ import { Adapter } from "@/lib/adapter.namespace";
 import { Config } from "@/lib/config.namespace";
 import { Help } from "@/lib/help.namespace";
 import type { LoggerService } from "@/logger/logger.service";
-import { PrismaPg } from "@prisma/adapter-pg";
+import { PrismaNeon } from "@prisma/adapter-neon";
 import { PrismaClient } from "prisma/generated/client";
 
 export class DBService extends PrismaClient implements Adapter.DBClientInterface {
 	constructor(private readonly loggerService: LoggerService) {
 		const connectionString = Config.get("DATABASE_URL");
-		const adapter = new PrismaPg({ connectionString });
+		const adapter = new PrismaNeon({ connectionString });
 		super({ adapter });
 	}
 
